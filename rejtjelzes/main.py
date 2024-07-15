@@ -26,19 +26,29 @@ my_dict = {"a" : 0,
            "z" : 25,
            " " : 26}
 
-test_uzenet = "helloworld"
-test_kulcs = "abcdefgijkl"
-test_rejtjelzett = ""
-mostani_betu = 0
-
 def getkeyfromvalue(_value):
     key = list(filter(lambda x : my_dict[x] == _value, my_dict))[0]
     return key
 
-for i in range(len(test_uzenet)):
-    mostani_betu = my_dict.get(test_uzenet[i])+my_dict.get(test_kulcs[i])
-    if mostani_betu > 26:
-        mostani_betu = mostani_betu % 27
-    test_rejtjelzett += getkeyfromvalue(mostani_betu)
+def rejtjelzes(_uzenet,_kulcs):
+    _rejtjelzett = ""
+    mostani_betu = 0
+    for i in range(len(_uzenet)):
+        mostani_betu = my_dict.get(_uzenet[i]) + my_dict.get(_kulcs[i])
+        if mostani_betu > 26:
+            mostani_betu = mostani_betu % 27
+        _rejtjelzett += getkeyfromvalue(mostani_betu)
+    return _rejtjelzett
 
-print(test_rejtjelzett)
+def rejtjelzesreverse(_rejtjelzett,_kulcs):
+    _uzenet = ""
+    mostani_betu = 0
+    for i in range(len(_rejtjelzett)):
+        mostani_betu = my_dict.get(_rejtjelzett[i]) - my_dict.get(_kulcs[i])
+        if mostani_betu < 0:
+            mostani_betu += 27
+        _uzenet += getkeyfromvalue(mostani_betu)
+    return _uzenet
+
+print(rejtjelzes("zzz","xxx"))
+print(rejtjelzesreverse("vvv","xxx"))
