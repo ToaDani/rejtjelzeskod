@@ -29,12 +29,16 @@ my_dict = {"a" : 0,
 test_uzenet = "helloworld"
 test_kulcs = "abcdefgijkl"
 test_rejtjelzett = ""
+mostani_betu = 0
 
 def getkeyfromvalue(_value):
     key = list(filter(lambda x : my_dict[x] == _value, my_dict))[0]
     return key
 
 for i in range(len(test_uzenet)):
-    test_rejtjelzett += getkeyfromvalue(my_dict.get(test_uzenet[i])+my_dict.get(test_kulcs[i]))
+    mostani_betu = my_dict.get(test_uzenet[i])+my_dict.get(test_kulcs[i])
+    if mostani_betu > 26:
+        mostani_betu = mostani_betu % 27
+    test_rejtjelzett += getkeyfromvalue(mostani_betu)
 
 print(test_rejtjelzett)
