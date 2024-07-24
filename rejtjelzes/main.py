@@ -1,3 +1,4 @@
+import pytest
 my_dict = {"a" : 0,
            "b" : 1,
            "c" : 2,
@@ -100,8 +101,18 @@ def gyujtes(_szotoredek,_szolista,_angolszotar):
     print(szolistavalt)
     return szolistavalt
 
+def rekurvizszogyujtes(_szolista,_szotomblen,_kodoltszo):
+    for i in _szolista[_szotomblen-1:]:
+        return "a"
+
+print("early",len("early bird catches the each"))
+print("curiosity",len("curiosity killed the cabin"))
+
+
+
 def kettouzenetdekodolasa(_szo,_kodoltuzenet1,_kodoltuzenet2,_kulcs):
     try:
+        szoeleje =""
         kulcstoredek = rejtjelzesreverse(_kodoltuzenet1[0:len(_szo)], _szo)
         szotoredek = rejtjelzesreverse(_kodoltuzenet2[0:len(kulcstoredek)], kulcstoredek)
         szotarbanvalt = 1
@@ -115,19 +126,19 @@ def kettouzenetdekodolasa(_szo,_kodoltuzenet1,_kodoltuzenet2,_kulcs):
             return
         else:
             szolista = []
-            szavak_eleje = ""
-            for szavak in szotoredektomb:
-                if 0 < len(szotoredektomb)-1:
-                    szavak_eleje += szavak
-                    print("szavak eleje",szavak_eleje)
-                else:
-                    gyujtott_szavak = gyujtes(szavak,szolista,angolszotar)
-            szostring = ""
-            for szavak in gyujtott_szavak:
-                szostring += szavak
-
-                print("szosztring",szostring)
-            _kulcs = kettouzenetdekodolasa(szostring, _kodoltuzenet2, _kodoltuzenet1, kulcstoredek)
+            if 1 < len(szotoredektomb):
+                for szavak in szotoredektomb:
+                    gyujtott_szavak = gyujtes(szavak, szolista, angolszotar)
+                for j in gyujtott_szavak[:len(szotoredektomb)-1]:
+                    szoeleje += j
+                for i in gyujtott_szavak[len(szotoredektomb) - 1:]:
+                    _kulcs = kettouzenetdekodolasa(szoeleje+i, _kodoltuzenet2, _kodoltuzenet1, kulcstoredek)
+            else:
+                gyujtott_szavak = gyujtes(szotoredektomb[0], szolista, angolszotar)
+                szostring = ""
+                for szavak in gyujtott_szavak:
+                    szostring += szavak
+                    _kulcs = kettouzenetdekodolasa(szostring, _kodoltuzenet2, _kodoltuzenet1, kulcstoredek)
     except:
         return
 
